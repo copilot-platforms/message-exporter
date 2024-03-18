@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "COPILOT_ENV=local next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -14,7 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.16",
     "@types/papaparse": "^5.3.13",
-    "copilot-node-sdk": "^1.2.2",
+    "copilot-node-sdk": "^2.0.0",
     "jspdf": "^2.5.1",
     "next": "14.0.1",
     "papaparse": "^5.4.1",
