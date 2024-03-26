@@ -157,7 +157,7 @@ export const MessageExporter = ({
               ))}
             </Select>
             <Select
-              label="Channels"
+              label="Channel"
               value={values.channel}
               name="channel"
               onChange={handleChangeValues}
