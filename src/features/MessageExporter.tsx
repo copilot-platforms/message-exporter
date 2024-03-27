@@ -67,7 +67,6 @@ export const MessageExporter = ({
   const handleChangeValues: ComponentProps<typeof Select>["onChange"] = (
     event
   ) => {
-
     const field = event.target.name;
     setValues({
       ...values,
@@ -168,7 +167,7 @@ export const MessageExporter = ({
                 if (!selected) {
                   return <div>Select a channel</div>;
                 }
-                return selectedChannel?.channelName ;
+                return selectedChannel?.channelName;
               }}
             >
               {channels.map((option, index) => (

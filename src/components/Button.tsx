@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Button, { ButtonProps } from "@mui/material/Button";
 import { Spinner } from "copilot-design-system";
@@ -30,11 +30,7 @@ export const BaseButton = (props: BaseButtonProps) => {
       }}
       {...props}
     >
-      {props.loading ? (
-        <Spinner size={5} />
-      ) : (
-        props.children
-      )}
+      {props.loading ? <Spinner size={5} /> : props.children}
     </Button>
   );
 };
