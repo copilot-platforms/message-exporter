@@ -29,7 +29,7 @@ export default async function Home({
   const internalUsers = await listAllInternalUsers(copilot, [], undefined);
 
   const clientsMap = new Map();
-  clients.forEach(client => clientsMap.set(client.id, client))
+  clients.forEach((client) => clientsMap.set(client.id, client));
 
   // Grouping channels by membership type. This will give us channels with membership type as group, individual and company
   const { group, individual, company } = groupBy(
@@ -41,19 +41,25 @@ export default async function Home({
   const groupChannels = (group || [])
     .map((channel) => ({
       ...channel,
-      members: channel.memberIds?.map(id => {
-        return clientsMap.get(id);
-      }).filter(Boolean) ?? [],
+      members:
+        channel.memberIds
+          ?.map((id) => {
+            return clientsMap.get(id);
+          })
+          .filter(Boolean) ?? [],
     }))
     .map((channel) => {
       return {
         ...channel,
-        channelName: channel.members
-          .map((member) => member?.givenName && member?.familyName
-            ? `${member.givenName} ${member.familyName}`
-            : 'Unknown User')
-          .join(", ") || 'Unnamed Channel'
-        };
+        channelName:
+          channel.members
+            .map((member) =>
+              member?.givenName && member?.familyName
+                ? `${member.givenName} ${member.familyName}`
+                : "Unknown User"
+            )
+            .join(", ") || "Unnamed Channel",
+      };
     });
 
   // For individual channels, client id is membershipEntityId and we need to get client detail based on that
@@ -62,9 +68,10 @@ export default async function Home({
 
     return {
       ...channel,
-      channelName: clientsChannels?.givenName && clientsChannels?.familyName
-        ? `${clientsChannels.givenName} ${clientsChannels.familyName}`
-        : 'Unnamed Channel',
+      channelName:
+        clientsChannels?.givenName && clientsChannels?.familyName
+          ? `${clientsChannels.givenName} ${clientsChannels.familyName}`
+          : "Unnamed Channel",
     };
   });
 

@@ -1,7 +1,6 @@
 {
   "name": "message-exporter",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "COPILOT_ENV=local next dev",
     "build": "next build",
@@ -14,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.16",
     "@types/papaparse": "^5.3.13",
+    "copilot-design-system": "^0.2.22",
     "copilot-node-sdk": "^2.0.0",
     "jspdf": "^2.5.1",
     "next": "14.0.1",

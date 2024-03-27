@@ -24,7 +24,7 @@ const getCsvMessages = (messages: MessageWithUserDetails[]) => {
       return [
         item.senderName ?? "",
         item.senderEmail ?? "",
-        new Date(item.updatedAt).toLocaleString(),
+        item.updatedAt ? new Date(item.updatedAt).toLocaleString() : "",
         item.text ?? "",
       ];
     }),
@@ -44,7 +44,7 @@ const getPdfMessages = (
         title: channelName,
         senderName: item.senderName ?? "",
         senderEmail: item.senderEmail ?? "",
-        date: new Date(item.updatedAt).toLocaleString(),
+        date: item.updatedAt ? new Date(item.updatedAt).toLocaleString() : "",
         text: item.text ?? "",
         isAttachmentIncluded: item?.isAttachmentIncluded ? "Yes" : "No",
       } as const;
@@ -116,7 +116,7 @@ export const downloadPdf = (
     10,
     yCoordinate + 5
   );
-// show participants
+  // show participants
   const participantsText = `Current participants: ${messagesParticipats
     ?.map((item) => {
       if (item?.senderName) {
@@ -139,7 +139,7 @@ export const downloadPdf = (
   addHeader();
 
   pdfMessages?.forEach((row) => {
-    const {senderName, senderEmail, date, text, isAttachmentIncluded} = row;
+    const { senderName, senderEmail, date, text, isAttachmentIncluded } = row;
 
     // Move to the next row
     yCoordinate += 5; // Adjust the spacing between rows as needed

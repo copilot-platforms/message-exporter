@@ -8,7 +8,6 @@ import {
   EXPORT_FORMATS,
   MESSAGE_SENDERS,
   EXPORT_SORT_ORDERS,
-  ExportFormat,
 } from "@/constants";
 import {
   Box,
@@ -68,7 +67,6 @@ export const MessageExporter = ({
   const handleChangeValues: ComponentProps<typeof Select>["onChange"] = (
     event
   ) => {
-
     const field = event.target.name;
     setValues({
       ...values,
@@ -116,9 +114,8 @@ export const MessageExporter = ({
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
           minHeight: "100vh",
-          padding: "64px 20px 100px 20px",
+          padding: "4rem 1.5rem 6.25rem 1.5rem",
         }}
       >
         <Box
@@ -170,7 +167,7 @@ export const MessageExporter = ({
                 if (!selected) {
                   return <div>Select a channel</div>;
                 }
-                return selectedChannel?.channelName ;
+                return selectedChannel?.channelName;
               }}
             >
               {channels.map((option, index) => (
