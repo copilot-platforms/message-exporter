@@ -18,14 +18,14 @@ export type MessageChannel = {
 };
 
 export type Message = {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  object: string;
-  channelId: string;
-  senderId: string;
-  text: string;
-  isAttachmentIncluded: boolean;
+  id?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  object?: string;
+  channelId?: string;
+  senderId?: string;
+  text?: string;
+  isAttachmentIncluded?: boolean;
 };
 
 export type MessageWithUserDetails = Message & {

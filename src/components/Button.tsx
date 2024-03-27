@@ -1,5 +1,7 @@
+'use client';
+
 import Button, { ButtonProps } from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Spinner } from "copilot-design-system";
 
 type BaseButtonProps = ButtonProps & {
   loading?: boolean;
@@ -29,7 +31,7 @@ export const BaseButton = (props: BaseButtonProps) => {
       {...props}
     >
       {props.loading ? (
-        <CircularProgress size={12} color="inherit" />
+        <Spinner size={5} />
       ) : (
         props.children
       )}

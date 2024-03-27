@@ -24,7 +24,7 @@ const getCsvMessages = (messages: MessageWithUserDetails[]) => {
       return [
         item.senderName ?? "",
         item.senderEmail ?? "",
-        new Date(item.updatedAt).toLocaleString(),
+        item.updatedAt ? new Date(item.updatedAt).toLocaleString() : '',
         item.text ?? "",
       ];
     }),
@@ -44,7 +44,7 @@ const getPdfMessages = (
         title: channelName,
         senderName: item.senderName ?? "",
         senderEmail: item.senderEmail ?? "",
-        date: new Date(item.updatedAt).toLocaleString(),
+        date: item.updatedAt ? new Date(item.updatedAt).toLocaleString() : '',
         text: item.text ?? "",
         isAttachmentIncluded: item?.isAttachmentIncluded ? "Yes" : "No",
       } as const;

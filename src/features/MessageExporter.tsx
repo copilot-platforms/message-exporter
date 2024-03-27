@@ -8,7 +8,6 @@ import {
   EXPORT_FORMATS,
   MESSAGE_SENDERS,
   EXPORT_SORT_ORDERS,
-  ExportFormat,
 } from "@/constants";
 import {
   Box,
@@ -116,9 +115,8 @@ export const MessageExporter = ({
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
           minHeight: "100vh",
-          padding: "64px 20px 100px 20px",
+          padding: "4rem 1.5rem 6.25rem 1.5rem",
         }}
       >
         <Box

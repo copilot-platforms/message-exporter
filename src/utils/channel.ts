@@ -25,7 +25,10 @@ export const sortMessages = (
   order: SortOrder = "ascending"
 ): Message[] => {
   const sortedMessages = [...messages].sort((a, b) => {
-    const dateA = new Date(a?.updatedAt);
+    if (!a?.updatedAt || !b?.updatedAt) {
+      return 0;
+    }
+    const dateA = new Date(a.updatedAt);
     const dateB = new Date(b?.updatedAt);
 
     const comparison = dateA.getTime() - dateB.getTime();
@@ -39,7 +42,7 @@ export const getMessagesByTimePeriod = (
   messages: Message[] = [],
   timeRange: TimeRange
 ) => {
-  const isMessagewithinTimeRange = (date: Date, days: number) => {
+  const isMessagewithinTimeRange = (date: Date | string, days: number) => {
     const currentDate = new Date();
     const targetDate = new Date(date);
     const differenceInDays = Math.floor(
@@ -51,6 +54,7 @@ export const getMessagesByTimePeriod = (
   // Filter messages based on time range
   const filterMessages = (message: Message, days: number) => {
     const updatedAt = message?.updatedAt;
+    if (!updatedAt) return false;
     return isMessagewithinTimeRange(updatedAt, days);
   };
 

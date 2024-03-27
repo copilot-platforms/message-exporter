@@ -196,7 +196,7 @@ export async function listAllMessages(
     nextToken,
     limit: 100,
   });
-  const allMessages = [...messages, ...(messagesList?.data as Message[])];
+  const allMessages = messagesList.data ? [...messages, ...messagesList.data] : messages;
   if (!messagesList?.nextToken) {
     return allMessages;
   }
