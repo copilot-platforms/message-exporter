@@ -77,11 +77,12 @@ export const downloadPdf = (
   const pdf = new jsPDF({
     format: "a4",
   });
+  const pageHeight = pdf.internal.pageSize.height;
 
   const messagesParticipats = getMessagesParticipants(messages);
 
-  const addNewPageIfNeeded = (heightNeeded: number) => {
-    if (yCoordinate + heightNeeded > 250) {
+  const addNewPageIfNeeded = (blockHeight: number) => {
+    if (yCoordinate + blockHeight > pageHeight - 20) {
       pdf.addPage();
       yCoordinate = 20;
       currentPage++;
@@ -93,6 +94,10 @@ export const downloadPdf = (
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(12);
     pdf.text(`Page ${currentPage}`, 10, 10);
+
+    // reset the font and size
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(10);
   };
 
   // show channel name at the top
@@ -130,27 +135,40 @@ export const downloadPdf = (
     })
     .join(", ")}`;
 
-  const maxWidth = 180;
+  const maxWidth = pdf.internal.pageSize.width - 36;
   const participantsLines = pdf.splitTextToSize(participantsText, maxWidth);
   const textHeight = participantsLines.length * 14;
-  pdf.text(participantsLines, 10, yCoordinate + 12);
 
-  yCoordinate += textHeight - 5;
+  // Page number
   addHeader();
 
+  // Participants
+  pdf.text(participantsLines, 10, yCoordinate + 12);
+
+  yCoordinate += textHeight;
+
   pdfMessages?.forEach((row) => {
-    const { senderName, senderEmail, date, text, isAttachmentIncluded } = row;
-
     // Move to the next row
-    yCoordinate += 5; // Adjust the spacing between rows as needed
+    yCoordinate += 5;
 
-    // Display sender, email, date, and text within the border
+    const { senderName, senderEmail, date, text, isAttachmentIncluded } = row;
+    const nameHeight = pdf.getTextDimensions(senderName, {
+      fontSize: 12,
+      maxWidth: 180,
+    }).h;
+    const textHeight = pdf.getTextDimensions(text, {
+      fontSize: 10,
+      maxWidth,
+    }).h;
+    const blockHeight = textHeight + nameHeight + 12;
+
+    // Now that we've got the dimensions, check if we need to add a new page
+    addNewPageIfNeeded(blockHeight);
+
+    pdf.text(`${senderName}`, 12, yCoordinate + 5);
     pdf.setFontSize(10);
-    pdf?.text(`${senderName}`, 12, yCoordinate + 5);
-    // Set the draw color to gray
+    // Set the draw color to gray for the sender email
     pdf.setTextColor(128, 128, 128); // Adjust the RGB values as needed
-
-    // Draw the email in gray color
     pdf.text(
       `(${senderEmail})`,
       12 + pdf?.getStringUnitWidth(senderName) * 4,
@@ -161,43 +179,27 @@ export const downloadPdf = (
     pdf.setTextColor(0, 0, 0);
     pdf.setFont("helvetica", "normal");
 
-    // Calculate the height of the text dynamically
-    const textHeight = pdf.getTextDimensions(text, {
-      fontSize: 10,
-      maxWidth: 136,
-    }).h;
-
-    // Calculate total block height including sender, email, and additional spacing
-    const blockHeight = textHeight + 25; // Adjust as needed based on your design
-
     // Draw the text with dynamic height
-    pdf.text(` ${text}`, 12, yCoordinate + 10, {
-      maxWidth: 175,
+    pdf.text(text, 12, yCoordinate + 16, {
       align: "left",
+      maxWidth,
     });
 
     pdf.text(` ${date}`, 150, yCoordinate + 5);
     pdf.text(
       ` ${isAttachmentIncluded === "Yes" ? "attachement is included" : ""}`,
       12,
-      yCoordinate + 20
+      yCoordinate
     );
 
     // Set the draw color to gray for the border
     pdf.setDrawColor(128, 128, 128);
 
     // Draw a border around the message details with dynamic height
-    pdf.rect(
-      10,
-      yCoordinate,
-      pdf?.getStringUnitWidth("message-container") * 22,
-      blockHeight - 10
-    );
+    pdf.rect(10, yCoordinate, maxWidth + 12, blockHeight);
     pdf.setFont("helvetica", "bold");
 
-    // Move to the next row
-    yCoordinate += blockHeight + (isAttachmentIncluded === "Yes" ? 10 : 5); // Adjust the spacing between rows as needed
-    addNewPageIfNeeded(isAttachmentIncluded === "Yes" ? 25 : 5);
+    yCoordinate += blockHeight + 21;
   });
 
   // Save the PDF
