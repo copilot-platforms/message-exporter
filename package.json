@@ -14,7 +14,7 @@
     "@mui/material": "^5.14.16",
     "@types/papaparse": "^5.3.13",
     "copilot-design-system": "^0.2.22",
-    "copilot-node-sdk": "^3.2.0",
+    "copilot-node-sdk": "^3.5.1",
     "jspdf": "^2.5.1",
     "next": "14.0.1",
     "papaparse": "^5.4.1",
