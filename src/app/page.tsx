@@ -12,7 +12,7 @@ import {
 const apiKey = need<string>(process.env.COPILOT_API_KEY);
 
 // One minute
-export const maxDuration = 60000;
+export const maxDuration = 300;
 
 export default async function Home({
   searchParams,
