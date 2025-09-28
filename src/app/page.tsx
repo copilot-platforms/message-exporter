@@ -11,8 +11,7 @@ import {
 
 const apiKey = need<string>(process.env.COPILOT_API_KEY);
 
-// One minute
-export const maxDuration = 60000;
+export const maxDuration = 300;
 
 export default async function Home({
   searchParams,
@@ -66,7 +65,7 @@ export default async function Home({
     });
 
   // For individual channels, client id is membershipEntityId and we need to get client detail based on that
-  const invividualChannels = individual.map((channel) => {
+  const invividualChannels = (individual || []).map((channel) => {
     const clientsChannels = clientsMap.get(channel.membershipEntityId);
 
     return {
