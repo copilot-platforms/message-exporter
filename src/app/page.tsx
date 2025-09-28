@@ -66,7 +66,7 @@ export default async function Home({
     });
 
   // For individual channels, client id is membershipEntityId and we need to get client detail based on that
-  const invividualChannels = individual.map((channel) => {
+  const invividualChannels = (individual || []).map((channel) => {
     const clientsChannels = clientsMap.get(channel.membershipEntityId);
 
     return {
