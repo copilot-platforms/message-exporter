@@ -1463,10 +1463,10 @@ copilot-design-system@^0.2.22:
     "@svgr/core" "^8.1.0"
     react "18.2.0"
 
-copilot-node-sdk@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/copilot-node-sdk/-/copilot-node-sdk-3.5.1.tgz#99fb3db7b1f2e0f7574862b9cf5accebc161af3e"
-  integrity sha512-0qmmJJD0LMnORVxsbhqjtqEJ3f2d8TbY5BYXL2sDiNTi53QDuQuAwQUmHp8DZfqVbaTz9waZhgJMq5zL7c8BmA==
+copilot-node-sdk@^3.17.1:
+  version "3.17.1"
+  resolved "https://registry.yarnpkg.com/copilot-node-sdk/-/copilot-node-sdk-3.17.1.tgz#9cd6ceb2cfb59b25d8e3b2b2be8c3de976fb66ec"
+  integrity sha512-2+vwTLXP6NoQrdC0g0rJqQ3JXL0x75Y44Y3pAu0SMpNo3Xl0iSmU8H0qJeGaotWLM0abJSPHAy8IazBTToEDbw==
   dependencies:
     isomorphic-fetch "^3.0.0"
     next "^14.0.2"
