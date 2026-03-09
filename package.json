@@ -19,7 +19,7 @@
     "copilot-design-system": "^0.2.22",
     "copilot-node-sdk": "^3.17.1",
     "jspdf": "^2.5.1",
-    "next": "14.0.1",
+    "next": "14.2.35",
     "papaparse": "^5.4.1",
     "react": "^18",
     "react-dom": "^18"
